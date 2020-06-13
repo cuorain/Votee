@@ -16,3 +16,18 @@
 //= require popper
 //= require bootstrap-sprockets
 //コンパイル高速化したいならbootstrapにする
+
+//ホーム画面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+.img-hidden {
+  height: 300px;
+  overflow: hidden;
+}
+//カードのアイコン
+.card-img-top {
+  padding: 10px;
+}
+//副見出し
+.lead {
+  font-size: 25px;
+}
+//＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
