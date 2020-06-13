@@ -15,27 +15,31 @@
       <li class="nav-item">
         <a class="nav-link" href="#">アンケート一覧</a>
       </li>
-      <!--ログインしてない時-->
-      <li class="nav-item">
-        <a class="nav-link" href="#">ログイン</a>
-      </li>
       <!--ログインしてる時-->
-      <li class="nav-item">
-        <a class="nav-link" href="#">アンケート作成</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">タイムライン</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          メニュー
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">ユーザ検索</a>
-          <a class="dropdown-item" href="#">設定</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">ログアウト</a>
-        </div>
-      </li>
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link" href="#">アンケート作成</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">タイムライン</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            メニュー
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">ユーザ検索</a>
+            <a class="dropdown-item" href="#">設定</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">ログアウト</a>
+          </div>
+        </li>
+
+      <!--ログインしてない時-->
+      <% else %>
+        <li class="nav-item">
+          <a class="nav-link" href="#">ログイン</a>
+        </li>
+      <% end %>
     </ul>
 </nav>
