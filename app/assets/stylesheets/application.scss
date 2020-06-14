@@ -12,22 +12,38 @@
  *
  */
 @import "bootstrap";
-//= require jquery3
-//= require popper
-//= require bootstrap-sprockets
-//コンパイル高速化したいならbootstrapにする
+
 
 //ホーム画面＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-.img-hidden {
-  height: 300px;
-  overflow: hidden;
-}
-//カードのアイコン
-.card-img-top {
-  padding: 10px;
-}
-//副見出し
-.lead {
-  font-size: 25px;
-}
+  .img-hidden {
+    height: 300px;
+    overflow: hidden;
+  }
+  //カードのアイコン
+  .card-img-top {
+    padding: 10px;
+  }
+  //副見出し
+  .lead {
+    font-size: 25px;
+  }
+//フォーム＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+  .field {
+    margin: 10px 0;
+  }
+  //画像プレビューのサイズ
+  #image_preview {
+    width: 200px;
+    height: 200px;
+  }
+  //バッジ開業させない(エラーの箇所にタグが入りレイアウト崩れるの防止)
+  .field_with_errors {
+    display: inline;
+    input {
+      @extend .is-invalid;//エラーを赤枠で囲う
+    }
+  }
+
+//＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+//＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
 //＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊

@@ -21,7 +21,10 @@ gem 'uglifier', '>= 1.3.0'
 # device
 gem 'devise'
 gem 'omniauth-twitter'
-
+#都道府県をコード管理する
+gem 'jp_prefecture'
+#画像アップロード
+gem 'carrierwave'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -61,6 +64,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
   gem 'webdrivers'
+  gem 'factory_bot_rails'
+  gem 'database_cleaner'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

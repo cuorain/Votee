@@ -66,4 +66,28 @@ RSpec.configure do |config|
       driven_by :selenium, using: :headless_chrome, screen_size: [1400, 1400]
     end
   end
+  
+  # FactoryBotの利用をON
+  config.include FactoryBot::Syntax::Methods
+
+  # DatabaseCleanerの設定
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+
+  config.before(:all) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:all) do
+    DatabaseCleaner.clean
+  end
 end
