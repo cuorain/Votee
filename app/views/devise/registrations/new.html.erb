@@ -1,11 +1,13 @@
-<div class="container sign-up-contailner">
+<% provide(:title, "新規登録")%>
+<div class="error_message">
+  <%= devise_error_messages! %>
+</div>
+<div class="container sign-up-contailner mt-5">
 <h2>新規登録</h2>
 
 <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
-  <div class="error_message">
-    <%= devise_error_messages! %>
-  </div>
-  
+
+
   <div class="field">
     <%= f.label :name, "ユーザ名" %>
     <span class="badge badge-danger">必須</span>

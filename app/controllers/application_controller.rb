@@ -5,24 +5,24 @@ class ApplicationController < ActionController::Base
 
 
 
-#リダイレクトうまくいかなかったら試す
+
   #   #アカウント登録後のリダイレクト先
   # def after_sign_up_path_for(resource)
-  #   about_path
+  #   user_path(current_user)
   # end
-  #
-  # #アカウント編集後のリダイレクト先
-  # def after_update_path_for(resource)
-  #   #リダイレクト先のパス
-  # end
-  #
-  # def after_sign_in_path_for(resource)
-  #   about_path
-  # end
-  #
-  # def after_sign_out_path_for(scope)
-  #   # return the path based on scope
-  # end
+
+  #アカウント編集後のリダイレクト先
+  def after_update_path_for(resource)
+    #リダイレクト先のパス
+  end
+
+  def after_sign_in_path_for(resource)
+    root_path
+  end
+
+  def after_sign_out_path_for(scope)
+    root_path
+  end
 
   protected
 

@@ -1,13 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationHelper, type: :helper do
-  describe "full_title" do
-    context "page title is empty" do
-      it "| remove" do
+  describe "タイトル表示" do
+    context "ホーム画面の時" do
+      it "| が表示されないこと" do
         expect(helper.full_title).to eq('The survey')
       end
     end
-    context "page title is not empty" do
+    context "タイトルがprovideされている時" do
       it "home" do
         expect(helper.full_title('Home')).to eq('Home | The survey')
       end

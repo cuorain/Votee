@@ -7,8 +7,8 @@
     <p>The surveyはアンケートに特化したSNSアプリです。</p>
     <p>みんなの好きなものや考え方を知ることができます。</p>
     <p>簡単フィルタリングで、世代や性別の違いが分かります。</p>
-    <button type="button" class="btn btn-primary" href="signup">新規登録</button>
-    <button type="button" class="btn btn-success">アンケートを見てみたい</button>
+    <span><%= link_to "新規登録", signup_path, class: "btn btn-primary" %></span>
+    <span><%= link_to "アンケートを見る", "#", class: "btn btn-success" %></span>
   </div>
 </div>
 <!--説明部分（カード）-->

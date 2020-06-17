@@ -3,18 +3,18 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
-  def new
-
-  end
+  # def new
+  #
+  # end
 
   # POST /resource/sign_in
   # def create
   #   super
   # end
 
-  def destroy
-    super
-  end
+  # def destroy
+  #   super
+  # end
 
   # protected
 
