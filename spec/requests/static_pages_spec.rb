@@ -1,14 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe "StaticPages", type: :request do
-  describe "correct routes check" do
-    it "root url" do
-      get root_url
-      expect(response).to have_http_status(:success)
+  describe "リンクが正しいか" do
+    context 'ログイン前' do
+      it "ホーム" do
+        get root_url
+        expect(response).to have_http_status(:success)
+      end
+      it "アバウト" do
+        get about_url
+        expect(response).to have_http_status(:success)
+      end
     end
-    it "about url" do
-      get about_url
-      expect(response).to have_http_status(:success)
+
+    context 'ログイン後' do
+      before do
+        user = create(:user)
+        post login_path, params: {session: {email: user.email, password: user.password}}
+      end
     end
   end
 end

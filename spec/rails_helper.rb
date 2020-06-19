@@ -79,7 +79,8 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation
   end
-
+  #テストヘルパー読み込み
+  config.include TestHelper
   config.before(:each) do
     DatabaseCleaner.start
   end

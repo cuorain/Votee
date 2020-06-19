@@ -51,6 +51,7 @@
 
   <div class="field">
     <%= f.label :image, "プロフィール画像" %>
+    <%= f.hidden_field :image_cache%>
     <%= f.file_field :image, id: :user_image %><br>
     <% if @user.image? %>
       <%= image_tag @user.image.url, id: :image_preview %>

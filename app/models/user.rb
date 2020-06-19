@@ -11,4 +11,12 @@ class User < ApplicationRecord
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, length: {maximum: 256},
       format: { with: VALID_EMAIL_REGEX }
+
+  def self.search(search)
+    if search.present?
+      where(['name LIKE ?', "%#{search}%"])
+    else
+      all
+    end
+  end
 end
