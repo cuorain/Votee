@@ -28,6 +28,17 @@ FactoryBot.define do
     image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
   end
 
+  factory :other, class: User do
+    name {"doraemon"}
+    email {"dokodemo@gmail.com"}
+    password {"password"}
+    password_confirmation {"password"}
+    sex {"1"}
+    birthday {1990-1-1}
+    prefecture_code {10}
+    image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
+  end
+
   factory :mob_user, class: User do
     sequence(:name) {|n| "test#{n}"}
     sequence(:email) {|n| "test#{n}@gmail.com"}

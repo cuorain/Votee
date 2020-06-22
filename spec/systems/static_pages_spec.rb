@@ -28,7 +28,7 @@ RSpec.describe "static_pages", type: :system do
         #expect(page).to have_link 'タイムライン', href:
         find(".dropdown-toggle").click
         expect(page).to have_link 'ユーザ検索', href: users_path
-        #expect(page).to have_link '設定', href:
+        expect(page).to have_link '設定', href: edit_user_registration_path(current_user)
         expect(page).to have_link 'ログアウト', href: logout_path
       end
       it "ユーザ情報が正しいか" do
@@ -36,5 +36,6 @@ RSpec.describe "static_pages", type: :system do
         expect(page).to have_selector "div.user-status", text: @user.name
       end
     end
+
   end
 end

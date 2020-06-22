@@ -26,7 +26,9 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/users">ユーザ検索</a>
-            <a class="dropdown-item" href="#">設定</a>
+            <%= link_to edit_user_registration_path(current_user), class: 'dropdown-item' do %>
+              <span class="dropdown-item">設定</span>
+            <% end %>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/logout" data-method="delete">ログアウト</a>
           </div>
