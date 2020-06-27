@@ -1,17 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {registrations: 'users/registrations',
-                                    sessions: 'users/sessions' }
-  devise_scope :user do
-    get 'signup', to: 'users/registrations#new'
-    post 'signup', to: 'users/registrations#create'
-    get 'users/edit_password', to: 'users/registrations#edit_password'
-    get 'login', to: 'users/sessions#new'
-    post 'login', to: 'users/sessions#create'
-    delete 'logout', to: 'users/sessions#destroy'
-  end
-
   root 'static_pages#home'
   get '/about', to: 'static_pages#about'
-
-  resources :users, only: [:index, :show]
+  get '/signup', to: 'users#new'
+  post '/signup', to: 'users#create'
+  get '/edit_password/:id', to: 'users#edit_password', as: "edit_password"
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
+  resources :users
 end

@@ -13,7 +13,7 @@
         <a class="nav-link" href="#">アンケート一覧</a>
       </li>
       <!--ログインしてる時-->
-      <% if user_signed_in? %>
+      <% if logged_in? %>
         <li class="nav-item">
           <a class="nav-link" href="#">アンケート作成</a>
         </li>
@@ -26,7 +26,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/users">ユーザ検索</a>
-            <%= link_to edit_user_registration_path(current_user), class: 'dropdown-item' do %>
+            <%= link_to edit_user_path(current_user), class: 'dropdown-item' do %>
               <span class="dropdown-item">設定</span>
             <% end %>
             <div class="dropdown-divider"></div>

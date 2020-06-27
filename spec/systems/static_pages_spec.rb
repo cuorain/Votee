@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "static_pages", type: :system do
   describe "ログインの有無" do
-
+    include SessionsHelper
     context "ログインしてない時" do
       it "リンクがあるか" do
         visit root_path
@@ -28,7 +28,7 @@ RSpec.describe "static_pages", type: :system do
         #expect(page).to have_link 'タイムライン', href:
         find(".dropdown-toggle").click
         expect(page).to have_link 'ユーザ検索', href: users_path
-        expect(page).to have_link '設定', href: edit_user_registration_path(current_user)
+        expect(page).to have_link '設定', href: edit_user_path(@user)
         expect(page).to have_link 'ログアウト', href: logout_path
       end
       it "ユーザ情報が正しいか" do

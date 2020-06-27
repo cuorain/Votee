@@ -36,7 +36,7 @@ end
 ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 RSpec.configure do |config|
-  config.include RequestSpecHelper, type: :request #type: :requestのときにRequestHelperをinclude
+  config.include TestHelper
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

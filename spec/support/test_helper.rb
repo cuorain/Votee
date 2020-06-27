@@ -5,4 +5,8 @@ module TestHelper
     fill_in 'パスワード', with: 'password'
     click_on 'ログイン', class: 'btn'
   end
+
+  def logged_in?
+    !session[:user_id].nil?
+  end
 end

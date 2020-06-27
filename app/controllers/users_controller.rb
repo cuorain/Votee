@@ -1,4 +1,23 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:edit, :edit_password, :update, :destroy]
+  before_action :correct_user, only: [:edit, :edit_password, :update]
+  before_action :update_password, only: [:update]
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      log_in @user
+      flash[:success] = "アカウント登録が完了しました。"
+      redirect_to root_path
+    else
+      render 'new'
+    end
+  end
+
   def index
     @users = User.all.page(params[:page]).per(10).search(params[:search])
   end
@@ -6,4 +25,80 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
+
+  def edit
+    @user = current_user
+  end
+
+  def edit_password
+    @user = current_user
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(edit_user_params)
+      flash[:success] = "アカウント情報を変更しました。"
+      redirect_to root_path
+    else
+      if request.referer&.include?("/edit_password")
+        flash[:danger] = "新しいパスワードは６文字以上かつ、パスワード確認と同じ文字列にしてください。"
+        redirect_to request.referer
+      else
+        render 'edit'
+      end
+    end
+  end
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "アカウントを削除しました。"
+    redirect_to root_url
+  end
+
+private
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,
+        :sex, :birthday, :prefecture_code, :image )
+  end
+
+  def edit_user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation,
+        :sex, :prefecture_code, :image)
+  end
+
+  def current_password_confirmation
+    params.require(:user).permit(:current_password)
+  end
+
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+          redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def update_password
+    if params[:user][:password].blank?
+      if request.referer&.include?("/edit_password")
+        flash[:danger] = "新しいパスワードを入力してください。"
+        redirect_to request.referer
+      else
+        true
+      end
+    else
+      if @user.authenticate(params[:user][:current_password])
+        true
+      else
+        flash[:danger] = "現在のパスワードが違います。"
+        redirect_to request.referer
+      end
+    end
+  end
+
 end

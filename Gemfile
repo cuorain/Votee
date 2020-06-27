@@ -5,6 +5,7 @@ ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.4'
+gem 'bcrypt', '3.1.12'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
@@ -18,9 +19,6 @@ gem 'sassc-rails'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
-# device
-gem 'devise'
-gem 'omniauth-twitter'
 #都道府県をコード管理する
 gem 'jp_prefecture'
 #画像アップロード
