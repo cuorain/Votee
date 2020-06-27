@@ -26,6 +26,8 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
         name: ユーザ名
+      survey:
+        question: 質問
     models:
       user: ユーザ
   devise:

@@ -1,0 +1,20 @@
+<% provide(:title, "新規アンケート")%>
+<div class="error_message">
+  <%= render "shared/error_message", object: @survey %>
+</div>
+
+<div class="container sign-up-contailner mt-5">
+<h2>新規アンケート</h2>
+
+<%= form_with(model: @survey, url: surveys_path(@survey), method: :post, local: true) do |f| %>
+
+  <div class="field">
+    <%= f.label :question, "質問" %>
+    <%= f.text_field :question, autofocus: true, class: 'form-control' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規アンケート開始", class: "btn btn-primary" %>
+  </div>
+<% end %>
+</div>

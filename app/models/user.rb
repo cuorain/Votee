@@ -1,15 +1,22 @@
 class User < ApplicationRecord
+#関係
+  has_many :survey, dependent: :destroy
+#gem関係
   include JpPrefecture
   jp_prefecture :prefecture_code
   mount_uploader :image, ImageUploader
+#セッションのための設定
   attr_accessor :remember_token
+#ビフォアアクション系
   before_save {self.email = email.downcase}
+# バリデーション
   validates :name, presence: true, length: {maximum: 64}
     VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 256},
       format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
