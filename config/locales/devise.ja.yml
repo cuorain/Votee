@@ -28,6 +28,8 @@ ja:
         name: ユーザ名
       survey:
         question: 質問
+      choices:
+        answer: 選択肢
     models:
       user: ユーザ
   devise:

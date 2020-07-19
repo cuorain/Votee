@@ -1,0 +1,11 @@
+<div class="nested-fields">
+  <%= f.hidden_field :id %>
+  <div class="form-row">
+    <div class="form-group col-md-11 answer">
+      <%= f.text_field :answer, class: "form-control", id: "answer-field"%>
+    </div>
+    <div class="form-group col-md-1">
+      <%= link_to_remove_association '削除', f, class: 'btn btn-default' %>
+    </div>
+  </div>
+</div>

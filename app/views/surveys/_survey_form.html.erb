@@ -1,0 +1,47 @@
+<%= form_with(model: @survey, url: surveys_path, method: method, local: true) do |f| %>
+  <div class="field">
+    <%= f.label :question, "質問" %>
+    <%= f.text_field :question, autofocus: true, class: 'form-control' %>
+  </div>
+  <div class="choice_field" id='choices'>
+    <%= f.label :answer, "選択肢(10個まで)" %>
+    <%= f.fields_for :choices do |builder| %>
+      <%= render "choice_fields", f: builder %>
+    <% end %>
+  </div>
+  <div class="links">
+    <%= link_to_add_association "選択肢を追加", f, :choices,
+              class: "btn btn-success", id: "add-choice",
+              data: {
+                association_insertion_node: '#choices',
+                association_insertion_method: 'append'
+    }%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規アンケート開始", class: "btn btn-primary" %>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $(function() {
+  // limits the number of categories
+  $('.container').on('cocoon:after-insert', function() {
+    check_to_hide_or_show_add_link();
+  });
+
+  $('.container').on('cocoon:after-remove', function() {
+    check_to_hide_or_show_add_link();
+  });
+
+  check_to_hide_or_show_add_link();
+
+  function check_to_hide_or_show_add_link() {
+    if ($('.nested-fields:visible').length == 10) {
+      $('.links').hide();
+    } else {
+      $('.links').show();
+    }
+  }
+})
+</script>

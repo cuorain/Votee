@@ -14,7 +14,9 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-//= require jquery3
+//= require jquery
 //= require popper
 //= require bootstrap-sprockets
 //コンパイル高速化したいならbootstrapにする
+//= require cocoon
+//= コクーン追加
