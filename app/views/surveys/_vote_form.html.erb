@@ -11,6 +11,8 @@
   <%= f.label :comment, "コメント"%>
   <%= f.text_area :comment, class:"form-control"%>
 </div>
-
+<% if is_created?(@survey)%>
+  <div><%= link_to "アンケートの編集", edit_survey_path, class: "btn btn-warning"%></div>
+<% end %>
 <div class="submit"><%= f.submit "投票", class: "btn btn-primary" %></div>
 <div class="result"><%= link_to "結果を見る", survey_result_path, class: "btn btn-success" %></div>

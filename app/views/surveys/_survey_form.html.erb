@@ -1,4 +1,4 @@
-<%= form_with(model: @survey, url: surveys_path, method: method, local: true) do |f| %>
+<%= form_with(model: @survey, url: url, method: method, local: true) do |f| %>
   <div class="field">
     <%= f.label :question, "質問" %>
     <%= f.text_field :question, autofocus: true, class: 'form-control' %>
@@ -19,7 +19,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "新規アンケート開始", class: "btn btn-primary" %>
+    <%= f.submit submit_text, class: "btn btn-primary" %>
   </div>
 <% end %>
 

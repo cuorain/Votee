@@ -4,5 +4,5 @@
 </div>
 <div class="container sign-up-contailner mt-5">
 <h2>新規アンケート</h2>
-  <%= render 'survey_form', path: new_survey_path(@survey), method: :post %>
+  <%= render 'survey_form', submit_text: "新規アンケート開始", url: surveys_path, path: new_survey_path(@survey), method: :post %>
 </div>

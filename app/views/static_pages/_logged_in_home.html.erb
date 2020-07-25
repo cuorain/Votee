@@ -1,0 +1,13 @@
+<div class="user-info text-center">
+  <div class="user-image">
+    <% if current_user.image? %>
+      <%= image_tag current_user.image.url, id: :image_preview %>
+    <% else %>
+      <%= image_tag '/user_images/default.jpg', id: :image_preview %>
+    <% end %>
+  </div>
+  <div class="user-status">
+    <h1><%= current_user.name %></h1>
+  </div>
+  <%= link_to "マイアンケート", my_survey_path(current_user) %>
+</div>

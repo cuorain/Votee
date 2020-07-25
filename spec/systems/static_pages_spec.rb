@@ -8,7 +8,7 @@ RSpec.describe "static_pages", type: :system do
         visit root_path
         expect(page).to have_link 'The survey', href: root_path
         expect(page).to have_link 'ホーム', href: root_path
-        #expect(page).to have_link 'アンケート一覧', href:
+        expect(page).to have_link 'アンケート一覧', href: surveys_path
         expect(page).to have_link '新規登録', href: signup_path
         expect(page).to have_link 'ログイン', href: login_path
       end
@@ -23,9 +23,8 @@ RSpec.describe "static_pages", type: :system do
         visit root_path
         expect(page).to have_link 'The survey', href: root_path
         expect(page).to have_link 'ホーム', href: root_path
-        #expect(page).to have_link 'アンケート一覧', href:
-        #expect(page).to have_link 'アンケート作成', href:
-        #expect(page).to have_link 'タイムライン', href:
+        expect(page).to have_link 'アンケート一覧', href: surveys_path
+        expect(page).to have_link 'アンケート作成', href: new_survey_path
         find(".dropdown-toggle").click
         expect(page).to have_link 'ユーザ検索', href: users_path
         expect(page).to have_link '設定', href: edit_user_path(@user)

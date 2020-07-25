@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :choices
   resources :votes
   get 'surveys/:id/results', to: 'surveys#results', as: "survey_result"
+  get 'mysurveys/:id', to: 'surveys#my_survey', as: "my_survey"
 end

@@ -20,6 +20,10 @@ class SurveysController < ApplicationController
     @surveys = Survey.all.page(params[:page]).per(10).search(params[:search])
   end
 
+  def my_survey
+    @surveys = current_user.survey.all.page(params[:page]).per(10).search(params[:search])
+  end
+
   def show
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
@@ -30,9 +34,29 @@ class SurveysController < ApplicationController
     end
   end
 
+  def edit
+    @survey = Survey.find(params[:id])
+  end
+
   def results
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
+  end
+
+  def update
+    @survey = current_user.survey.find_by(params[:survey_id])
+    if @survey.update_attributes(survey_params)
+      flash[:success] = "アンケートを編集しました。"
+      redirect_to survey_path(@survey)
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    current_user.survey.find_by(params[:survey_id]).destroy
+    flash[:success] = "アンケートを削除しました。"
+    redirect_to surveys_path
   end
 
 private
