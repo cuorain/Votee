@@ -1,0 +1,14 @@
+<% provide(:title, @survey.question)%>
+<div class="container sign-up-contailner mt-5">
+<h2> <%= "【投票結果】#{@survey.question}" %> </h2>
+<div class="answer-link">
+  <% if current_user.voted?(@survey)%>
+    <%= link_to "投票修正", survey_path(@survey), class: "btn btn-info"%>
+  <% else %>
+    <%= link_to "投票する", survey_path(@survey), class: "btn btn-primary"%>
+  <% end %>
+</div>
+  <% @choices.each do |choice| %>
+    <li><%= "#{choice.answer} (#{vote_count(choice)})" %></li>
+  <% end %>
+</div>

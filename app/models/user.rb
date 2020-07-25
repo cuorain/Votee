@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 #関係
   has_many :survey, dependent: :destroy
+  has_many :vote, dependent: :destroy
 #gem関係
   include JpPrefecture
   jp_prefecture :prefecture_code
@@ -51,6 +52,14 @@ class User < ApplicationRecord
       where(['name LIKE ?', "%#{search}%"])
     else
       all
+    end
+  end
+
+  def voted?(survey)
+    if self.vote.find_by(survey_id: survey.id) == nil
+      false
+    else
+      true
     end
   end
 

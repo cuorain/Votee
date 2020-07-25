@@ -1,0 +1,11 @@
+<div class="error_message">
+  <%= render "shared/error_message", object: @new_vote %>
+</div>
+
+<div class="container sign-up-contailner mt-5">
+<h2>【新規投票】<%= @survey.question %></h2>
+
+  <%= form_with(model: @new_vote, url: votes_path, local: true) do |f| %>
+    <%= render "vote_form", f: f %>
+  <% end %>
+</div>

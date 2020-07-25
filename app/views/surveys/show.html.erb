@@ -1,13 +1,6 @@
 <% provide(:title, @survey.question)%>
-<div class="survey-info text-center">
-  <div class="question">
-    <h1><%= @survey.question %></h1>
-  </div>
-
-  <div class="choices">
-    <% @choices.each do |choice| %>
-      <h3><%= choice.answer %></h3>
-    <% end %>
-  </div>
-
-</div>
+<% if @new_vote %>
+  <%= render "new_vote" %>
+<% else %>
+  <%= render "edit_vote" %>
+<% end %>

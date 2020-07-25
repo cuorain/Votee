@@ -26,6 +26,7 @@ FactoryBot.define do
     birthday {1990-1-1}
     prefecture_code {10}
     image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
+
   end
 
   factory :other, class: User do

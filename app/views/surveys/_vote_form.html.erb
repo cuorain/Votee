@@ -1,0 +1,16 @@
+<%= f.hidden_field :survey_id, :value => @survey.id%>
+<div class="choice_field">
+  <%= f.collection_check_boxes :choice_ids, @choices, :id, :answer, include_hidden: false, multiple: true do |b|%>
+    <div class="answer">
+      <%= b.label {b.check_box + b.text} %>
+    </div>
+  <% end %>
+</div>
+
+<div class="comment_field">
+  <%= f.label :comment, "コメント"%>
+  <%= f.text_area :comment, class:"form-control"%>
+</div>
+
+<div class="submit"><%= f.submit "投票", class: "btn btn-primary" %></div>
+<div class="result"><%= link_to "結果を見る", survey_result_path, class: "btn btn-success" %></div>

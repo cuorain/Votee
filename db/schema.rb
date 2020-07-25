@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_075621) do
+ActiveRecord::Schema.define(version: 2020_07_23_022153) do
 
   create_table "choices", force: :cascade do |t|
     t.string "answer"
@@ -41,6 +41,26 @@ ActiveRecord::Schema.define(version: 2020_06_27_075621) do
     t.datetime "updated_at", null: false
     t.string "remember_digest"
     t.index ["email"], name: "index_users_on_email", unique: true
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "survey_id"
+    t.integer "choice_id"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_votes_on_choice_id"
+    t.index ["survey_id"], name: "index_votes_on_survey_id"
+    t.index ["user_id", "survey_id"], name: "index_votes_on_user_id_and_survey_id"
+    t.index ["user_id"], name: "index_votes_on_user_id"
+  end
+
+  create_table "votes_choices", force: :cascade do |t|
+    t.integer "vote_id"
+    t.integer "choice_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

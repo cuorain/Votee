@@ -7,7 +7,10 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+  post 'votes/:id', to: 'votes#create', as: "votes"
   resources :users
   resources :surveys
   resources :choices
+  resources :votes
+  get 'surveys/:id/results', to: 'surveys#results', as: "survey_result"
 end

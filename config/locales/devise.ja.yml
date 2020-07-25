@@ -30,6 +30,8 @@ ja:
         question: 質問
       choices:
         answer: 選択肢
+      votes:
+        comment: コメント
     models:
       user: ユーザ
   devise:

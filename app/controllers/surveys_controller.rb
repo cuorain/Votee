@@ -23,6 +23,16 @@ class SurveysController < ApplicationController
   def show
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
+    if current_user.voted?(@survey)
+      @edit_vote = current_user.vote.find_by(survey_id: @survey.id)
+    else
+      @new_vote = current_user.vote.build
+    end
+  end
+
+  def results
+    @survey = Survey.find(params[:id])
+    @choices = @survey.choices.all
   end
 
 private
