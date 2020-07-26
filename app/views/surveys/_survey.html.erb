@@ -1,4 +1,15 @@
-
-  <li>
-    <%= link_to survey.question, survey %>
+<% survey.each do |survey| %>
+  <li class="d-flex align-items-center">
+    <% if current_user.maked_survey?(survey) || current_user.voted?(survey) %>
+      <span class="survey-link"><%= link_to survey.question, survey_result_path(survey) %></span>
+      <% if current_user.voted?(survey)%>
+        <span class="btn btn-success survey-status">投票中</span>
+      <% else %>
+        <span class="btn btn-secondary survey-status">未投票</span>
+      <% end %>
+    <% else %>
+      <%= link_to survey.question, survey %>
+      <span class="btn btn-secondary survey-status">未投票</span>
+    <% end %>
   </li>
+<% end %>

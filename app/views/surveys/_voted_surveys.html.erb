@@ -1,0 +1,5 @@
+<% provide(:title, "参加中のアンケート")%>
+<div class="container mt-3">
+  <u><h3>参加中のアンケート</h3></u>
+  <%= render partial: "surveys/survey_feed", locals: { path: root_path, s: @voted_surveys, search: :voted_search } %>
+</div>

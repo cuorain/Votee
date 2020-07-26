@@ -63,4 +63,12 @@ class User < ApplicationRecord
     end
   end
 
+  def maked_survey?(survey)
+    if survey.user_id == self.id
+      true
+    else
+      false
+    end
+  end
+
 end

@@ -1,0 +1,5 @@
+<% survey.each do |survey| %>
+  <li class="d-flex align-items-center">
+    <span class="survey-link"><%= link_to survey.question, survey_result_path(survey) %></span>
+  </li>
+<% end %>

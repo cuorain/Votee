@@ -12,8 +12,8 @@ module TestHelper
 
   def vote(survey)
     visit survey_path(survey)
-    check 'りんご'
-    fill_in "コメント", with: "特にふじが好き。"
+    check 'ヨルシカ'
+    fill_in "コメント", with: "最高の音楽です！"
     click_on "投票", class: "btn"
   end
 end

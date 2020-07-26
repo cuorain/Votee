@@ -33,6 +33,31 @@
   .btn {
     margin-bottom: 10px;
   }
+//ログイン中のホーム＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
+  //ユーザ情報
+  .user-status {
+    border-bottom: solid;
+    border-bottom-style: double;
+    border-bottom-color: black;
+  }
+  .bg-light-custom {
+    background-color: #EEEEEE;
+  }
+  //アンケート一覧
+  .survey-status {
+    margin: 10px 10px 10px 0;
+    margin-left: auto;
+  }
+  .my-survey {
+
+    border: solid;
+    border-width: 0 1px 1px 0;
+  }
+  .voted-survey {
+
+    border: solid;
+    border-width: 0 1px 1px 0;
+  }
 //ヘッダー＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
   .none-decorate {
     text-decoration: none;
@@ -44,8 +69,8 @@
   }
   //画像プレビューのサイズ
   #image_preview {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
   }
   //バッジ開業させない(エラーの箇所にタグが入りレイアウト崩れるの防止)
   .field_with_errors {
@@ -56,21 +81,25 @@
   }
 
 //ユーザ一覧＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
-  .users {
+  .feeds {
     list-style: none;
     li {
        border-top: 1px solid lightgray;
-       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.22);
-       margin-top: 5px;
+       box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+       margin-top: 1px;
+       font-size: 20px;
     }
     h3 {
       margin-top: 10px;
     }
   }
+  .paginate {
+    margin-top: 10px;
+  }
 //アイコン
   #index_mini_image {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
     margin: 5px;
   }
 

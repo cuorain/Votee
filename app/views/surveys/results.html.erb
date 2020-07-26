@@ -2,10 +2,17 @@
 <div class="container sign-up-contailner mt-5">
 <h2> <%= "【投票結果】#{@survey.question}" %> </h2>
 <div class="answer-link">
-  <% if current_user.voted?(@survey)%>
-    <%= link_to "投票修正", survey_path(@survey), class: "btn btn-info"%>
+  <% if logged_in? %>
+    <% if current_user.voted?(@survey)%>
+      <%= link_to "投票修正", survey_path(@survey), class: "btn btn-info"%>
+    <% else %>
+      <%= link_to "投票する", survey_path(@survey), class: "btn btn-primary"%>
+    <% end %>
   <% else %>
-    <%= link_to "投票する", survey_path(@survey), class: "btn btn-primary"%>
+    <div class="alert alert-danger" role="alert">投票するにはアカウントが必要です。</div>
+    <div>アカウントをお持ちでない方は　<%= link_to "新規登録", signup_path, class: "btn btn-primary" %></div>
+    <div>アカウントをお持ちの方は　<%= link_to "ログイン", login_path, class: "btn btn-primary" %></div>
+    <hr/>
   <% end %>
 </div>
   <% @choices.each do |choice| %>
