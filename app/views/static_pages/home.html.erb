@@ -1,7 +1,7 @@
 <% provide(:title, "Home")%>
 <% if logged_in? %>
 <!-- ログインしている -->
-  <%= render "logged_in_home" %>
+  <%= render "users/user_page"%>
 <% else %>
 <!-- ログインしていない -->
   <%= render "not_logged_in_home" %>

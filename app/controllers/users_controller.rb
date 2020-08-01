@@ -25,7 +25,12 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @my_surveys = @user.survey.all.page(params[:page_mine]).per(10).search(params[:my_search])
-    @voted_surveys = Survey.joins(:votes).preload(:votes).group(:question).all.page(params[:page_voted]).per(10).search(params[:voted_search])
+    user_votes = Vote.where("user_id = ?", @user.id)
+    user_votes_ids = []
+    user_votes.each do |u|
+      user_votes_ids << u.survey_id
+    end
+    @voted_surveys = Survey.where("id IN (?)", user_votes_ids).page(params[:page_voted]).per(10).search(params[:voted_search])
   end
 
   def edit

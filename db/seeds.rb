@@ -172,7 +172,7 @@ end
       a3 = "安全性"
       a4 = "運転しやすさ"
     else
-      q = "好きなポケモンは？"
+      q = "好きなポケモンは？(PART#{n})"
       a1 = Faker::Games::Pokemon.name
       a2 = Faker::Games::Pokemon.name
       a3 = Faker::Games::Pokemon.name
@@ -188,11 +188,12 @@ end
     ])
 end
 
-80.times do |n|
-  users.each do |user|
+users.each do |user|
+  50.times do |n|
+    survey = Survey.all[rand(0..79)]
     user.vote.create!(
-      survey_id: n+1,
-      choice_ids: [rand(4*n+1..4*n+4)]
+      survey_id: survey.id,
+      choice_ids: survey.choices.all[rand(0..3)].id
     )
   end
 end
