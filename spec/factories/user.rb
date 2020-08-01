@@ -5,7 +5,7 @@ FactoryBot.define do
     password {"foobar"}
     password_confirmation {"foobar"}
     sex {"1"}
-    birthday {1990-1-1}
+    birthday {"1990-10-10"}
     prefecture_code {1}
 
     trait :invalid do
@@ -23,7 +23,7 @@ FactoryBot.define do
     password {"password"}
     password_confirmation {"password"}
     sex {"1"}
-    birthday {1990-1-1}
+    birthday {"1990-01-01"}
     prefecture_code {10}
     image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
 
@@ -35,7 +35,7 @@ FactoryBot.define do
     password {"password"}
     password_confirmation {"password"}
     sex {"1"}
-    birthday {1990-1-1}
+    birthday {"1990-10-01"}
     prefecture_code {10}
     image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
   end

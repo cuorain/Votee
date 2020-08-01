@@ -6,5 +6,5 @@
 <h2>【編集】<%= @survey.question %></h2>
   <%= render 'survey_form', submit_text: "アンケート更新", url: survey_path, path: edit_survey_path(@survey), method: :patch %>
   <%= link_to 'アンケート削除', survey_path, method: :delete, class: "btn btn-danger",
-      data: { confirm: "本当に削除しますか？（元に戻せません）" }%>
+      data: { confirm: "本当に削除しますか？（元に戻せません）", survey_id: @survey.id }%>
 </div>

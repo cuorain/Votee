@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all.page(params[:page]).per(10).search(params[:search])
+    @users = User.where(admin: false).page(params[:page]).per(10).search(params[:search])
   end
 
   def show

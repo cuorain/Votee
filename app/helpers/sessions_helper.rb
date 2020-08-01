@@ -42,7 +42,7 @@ module SessionsHelper
 
   def correct_user
     @user = User.find(params[:id])
-          redirect_to(root_url) unless current_user?(@user)
+          redirect_to(root_url) unless current_user?(@user) || @user.admin?
   end
 
   # 永続的セッションを破棄する

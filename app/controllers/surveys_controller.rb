@@ -46,7 +46,7 @@ class SurveysController < ApplicationController
   end
 
   def update
-    @survey = current_user.survey.find_by(params[:survey_id])
+    @survey = Survey.find(params[:id])
     if @survey.update_attributes(survey_params)
       flash[:success] = "アンケートを編集しました。"
       redirect_to survey_path(@survey)
@@ -56,7 +56,7 @@ class SurveysController < ApplicationController
   end
 
   def destroy
-    current_user.survey.find_by(params[:survey_id]).destroy
+    Survey.find_by(params[:survey_id]).destroy
     flash[:success] = "アンケートを削除しました。"
     redirect_to surveys_path
   end

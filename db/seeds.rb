@@ -2,7 +2,8 @@
 User.create!(
   name: "管理者",
   email: "test0@gmail.com",
-  password: "foobar"
+  password: "foobar",
+  admin: true
 )
 users = []
 #初期ユーザ
