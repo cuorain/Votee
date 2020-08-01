@@ -15,7 +15,42 @@
     <hr/>
   <% end %>
 </div>
-  <% @choices.each do |choice| %>
-    <li><%= "#{choice.answer} (#{vote_count(choice)})" %></li>
+  <% if @votes.count == 0 %>
+  <div class="alert alert-danger" role="alert">投票がされていません。</div>
+  <% else %>
+    <div id="chart"><%= pie_chart @chart %></div>
+    <div class="col-md-12 d-flex justify-content-center mt-5">
+      <table border="1" class="text-center">
+        <tr>
+          <% @choices.each do |c|%>
+            <th><%= c.answer %></th>
+          <% end %>
+        </tr>
+          <tr>
+            <% @choices.each do |c|%>
+              <th><%= vote_count(c) %></th>
+            <% end %>
+        </tr>
+      </table>
+    </div>
   <% end %>
+  <div class="comment">
+    <h3>コメント</h3>
+    <div class="p-1 comment-feeds">
+      <% @votes.each do |vote|%>
+        <li>
+          <% if vote.comment %>
+            <div class="row">
+              <div class="col-md-2 font-weight-bold"><%= voted_choice(vote) %></div>
+              <div class="col-md-10">
+                <%= image_tag voted_user(vote).image.url, id: :index_mini_image %>
+                <%= link_to voted_user(vote).name, user_path(voted_user(vote))%>
+                <%= vote.comment %>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </div>
+  </div>
 </div>

@@ -41,6 +41,8 @@ class SurveysController < ApplicationController
   def results
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
+    @votes = @survey.votes
+    @chart = VotesChoice.joins(:choice).where("vote_id IN (?)", @votes.ids).group(:answer).count
   end
 
   def update

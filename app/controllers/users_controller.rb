@@ -24,6 +24,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @my_surveys = @user.survey.all.page(params[:page_mine]).per(10).search(params[:my_search])
+    @voted_surveys = Survey.joins(:votes).preload(:votes).group(:question).all.page(params[:page_voted]).per(10).search(params[:voted_search])
   end
 
   def edit
@@ -68,19 +70,6 @@ private
 
   def current_password_confirmation
     params.require(:user).permit(:current_password)
-  end
-
-  def logged_in_user
-    unless logged_in?
-      store_location
-      flash[:danger] = "ログインしてください"
-      redirect_to login_url
-    end
-  end
-
-  def correct_user
-    @user = User.find(params[:id])
-          redirect_to(root_url) unless current_user?(@user)
   end
 
   def update_password

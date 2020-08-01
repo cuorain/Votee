@@ -20,3 +20,6 @@
 //コンパイル高速化したいならbootstrapにする
 //= require cocoon
 //= コクーン追加
+//= チャートキック
+//= require Chart.bundle
+//= require chartkick

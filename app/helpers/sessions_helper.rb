@@ -32,6 +32,19 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = "ログインしてください"
+      redirect_to login_url
+    end
+  end
+
+  def correct_user
+    @user = User.find(params[:id])
+          redirect_to(root_url) unless current_user?(@user)
+  end
+
   # 永続的セッションを破棄する
   def forget(user)
     user.forget
@@ -56,4 +69,6 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+
 end

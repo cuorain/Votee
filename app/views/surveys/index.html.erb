@@ -1,5 +1,5 @@
 <% provide(:title, "アンケート検索")%>
 <div class="container-fluid mt-5">
   <h1>アンケート検索</h1>
-  <%= render "survey_feed", path: surveys_path, s: @surveys, search: :search %>
+  <%= render "survey_feed", path: surveys_path, s: @surveys, paginate_param: "page", search: :search %>
 </div>

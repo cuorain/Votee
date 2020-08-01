@@ -69,7 +69,12 @@ GEM
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+    chartable (0.0.0.3)
+      activesupport (>= 3.0.0)
+      chronic (~> 0.10)
+    chartkick (3.3.2)
     childprocess (3.0.0)
+    chronic (0.10.2)
     cocoon (1.2.14)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -89,6 +94,8 @@ GEM
     factory_bot_rails (5.2.0)
       factory_bot (~> 5.2.0)
       railties (>= 4.2.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -249,10 +256,13 @@ DEPENDENCIES
   byebug
   capybara (>= 2.15)
   carrierwave
+  chartable
+  chartkick
   cocoon
   coffee-rails (~> 4.2)
   database_cleaner
   factory_bot_rails
+  faker
   jbuilder (~> 2.5)
   jp_prefecture
   jquery-rails
