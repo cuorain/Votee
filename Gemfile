@@ -10,7 +10,8 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', group: [:development, :test]
-gem 'mysql2'
+gem 'mysql2', group: [:production]
+gem 'dotenv-rails'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
