@@ -12,24 +12,24 @@
 
 ActiveRecord::Schema.define(version: 2020_07_23_022153) do
 
-  create_table "choices", force: :cascade do |t|
+  create_table "choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "answer"
-    t.integer "survey_id"
+    t.bigint "survey_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["survey_id"], name: "index_choices_on_survey_id"
   end
 
-  create_table "surveys", force: :cascade do |t|
+  create_table "surveys", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "question"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id", "created_at"], name: "index_surveys_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_surveys_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -43,10 +43,10 @@ ActiveRecord::Schema.define(version: 2020_07_23_022153) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "survey_id"
-    t.integer "choice_id"
+  create_table "votes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "survey_id"
+    t.bigint "choice_id"
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -56,11 +56,13 @@ ActiveRecord::Schema.define(version: 2020_07_23_022153) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
-  create_table "votes_choices", force: :cascade do |t|
+  create_table "votes_choices", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "vote_id"
     t.integer "choice_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "choices", "surveys"
+  add_foreign_key "surveys", "users"
 end
