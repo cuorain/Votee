@@ -1,5 +1,6 @@
 class SurveysController < ApplicationController
-  before_action :logged_in?
+  before_action :logged_in_user, only: [:new, :create, :my_survey, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def new
     @survey = current_user.survey.new

@@ -43,5 +43,5 @@ RSpec.feature '投票編集' do
       expect(page).to have_content "新規投票"
     end
   end
-
+  #二重投票不可はmodelへ
 end

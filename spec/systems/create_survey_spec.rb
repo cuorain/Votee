@@ -52,4 +52,11 @@ RSpec.feature 'アンケート作成' do
     expect(page).to have_content '選択肢を入力してください'
   end
 
+  scenario "ログインしないと作成できない" do
+    visit root_path
+    click_on "ログアウト"
+    visit new_survey_path
+    expect(page).to have_content 'ログインしてください'
+  end
+
 end

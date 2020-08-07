@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :edit_password, :update, :destroy]
-  before_action :correct_user, only: [:edit, :edit_password, :update]
+  before_action :correct_user, only: [:edit, :edit_password, :update, :destroy]
   before_action :update_password, only: [:update]
+  before_action :not_logged_in_user, only: [:new, :create]
 
   def new
     @user = User.new
@@ -24,6 +25,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @path = user_path(@user)
     @my_surveys = @user.survey.all.page(params[:page_mine]).per(10).search(params[:my_search])
     user_votes = Vote.where("user_id = ?", @user.id)
     user_votes_ids = []

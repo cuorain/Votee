@@ -35,14 +35,24 @@ module SessionsHelper
   def logged_in_user
     unless logged_in?
       store_location
-      flash[:danger] = "ログインしてください"
+      flash[:danger] = "ログインしてください。"
       redirect_to login_url
+    end
+  end
+
+  def not_logged_in_user
+    if logged_in?
+      flash[:danger] = "すでにログインしています。"
+      redirect_to root_url
     end
   end
 
   def correct_user
     @user = User.find(params[:id])
-          redirect_to(root_url) unless current_user?(@user) || @user.admin?
+    if !current_user?(@user) && current_user.admin? == false
+      flash[:danger] = "不正なユーザーです。"
+      redirect_to(root_url)
+    end
   end
 
   # 永続的セッションを破棄する

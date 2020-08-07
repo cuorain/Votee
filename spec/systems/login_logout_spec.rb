@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'ログインとログアウト' do
   background do
-    create(:user)
+    @user = create(:user)
   end
   scenario 'ログイン成功' do
     visit root_path
@@ -30,5 +30,12 @@ RSpec.feature 'ログインとログアウト' do
     click_on 'ログイン', class: 'btn'
     click_on 'ログアウト'
     expect(page).to have_content 'ログアウトしました'
+  end
+
+  scenario "ログイン状態だと入れないようにする" do
+    login(:user)
+    visit login_path
+    expect(page).to have_content "すでにログインしています。"
+    expect(page).to have_content "#{@user.name}"
   end
 end

@@ -1,6 +1,6 @@
 <div class="search_form">
   <%= form_with(url: path, method: :get, local: true) do |f| %>
-    <%= f.text_field search%>
+    <%= f.text_field search, class: "search-word"%>
     <%= f.submit "検索", class: "btn btn-primary"%>
   <% end %>
 </div>
@@ -12,7 +12,7 @@
       <%= render "surveys/not_logged_in_survey", survey: s %>
     <% end %>
   <% else %>
-    <div class="alert alert-danger" role="alert">該当するアンケートが見つかりません</div>
+    <div class="alert alert-danger" role="alert">該当するアンケートが見つかりません。</div>
   <% end %>
 </div>
 <div class="paginate mt-20"><%= paginate s, :param_name => paginate_param %></div>

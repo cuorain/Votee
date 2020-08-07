@@ -18,7 +18,7 @@ RSpec.feature 'ユーザ登録' do
     expect(page).to have_content 'アカウント登録が完了しました'
   end
 
-  scenario 'ユーザ登録失敗' do
+  scenario '不正なパラメ' do
     visit root_path
     click_on '新規登録', class: "btn"
     fill_in 'ユーザ名', with: ' '
@@ -34,4 +34,14 @@ RSpec.feature 'ユーザ登録' do
     click_on '新規ユーザ登録', class: 'btn'
     expect(page).to have_content 'エラーがあります'
   end
+
+  scenario "ログイン状態だと入れないようにする" do
+    user = create(:user)
+    login(:user)
+    visit signup_path
+    expect(page).to have_content "すでにログインしています。"
+    expect(page).to have_content "#{user.name}"
+  end
+
+#他のバリデーションはuser_spec.rbでテスト
 end

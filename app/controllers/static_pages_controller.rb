@@ -1,6 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
     if logged_in?
+      @path = root_path
       @user = current_user
       @my_surveys = current_user.survey.all.page(params[:page_mine]).per(10).search(params[:my_search])
       user_votes = Vote.where("user_id = ?", @user.id)

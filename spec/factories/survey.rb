@@ -13,7 +13,7 @@ FactoryBot.define do
 
   factory :other_survey, class: Survey do
     question {"好きなスポーツは？"}
-    association :user, factory: :new_user
+    association :user, factory: :other
     after(:build) do |survey|
       survey.choices << FactoryBot.build(:choice, answer: "野球")
       survey.choices << FactoryBot.build(:choice, answer: "サッカー")

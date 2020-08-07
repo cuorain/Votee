@@ -43,4 +43,16 @@ RSpec.feature 'アンケート結果' do
       expect(page).to have_link "ログイン", count: 2
     end
   end
+
+  context "リンク" do
+    example "投票してる時、編集のリンク" do
+      vote(@survey)
+      visit survey_result_path(@survey)
+      expect(page).to have_link "投票修正"
+    end
+    example "投票してる時、投票のリンク" do
+      visit survey_result_path(@survey)
+      expect(page).to have_link "投票する"
+    end
+  end
 end

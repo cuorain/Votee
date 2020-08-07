@@ -16,11 +16,11 @@
           <div class="d-flex">
             <div class="flex-fill border-right">
               主催<br/>
-              <strong><%= @user.survey.count %></strong>
+              <strong class="survey-count"><%= @user.survey.count %></strong>
             </div>
             <div class="flex-fill">
               参加中<br/>
-              <strong><%= @user.vote.count %></strong>
+              <strong class="voted-count"><%= @user.vote.count %></strong>
             </div>
           </div>
         </div>
@@ -29,11 +29,11 @@
           <div class="d-flex justify-content-between">
             <div class="flex-fill border-right">
               <span> フォロー </span><br/>
-              <strong><%= @user.survey.count %></strong>
+              <strong class="follow-count"><%= @user.survey.count %></strong>
             </div>
             <div class="flex-fill">
               フォロワー<br/>
-              <strong><%= @user.vote.count %></strong>
+              <strong class="follower-count"><%= @user.vote.count %></strong>
             </div>
           </div>
         </div>
@@ -41,10 +41,10 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-6 rounded-0 card my-survey">
+    <div class="col-md-6 rounded-0 my-survey">
       <%= render "surveys/my_surveys" %>
     </div>
-    <div class="col-md-6 rounded-0 card voted-survey">
+    <div class="col-md-6 rounded-0 voted-survey">
       <%= render "surveys/voted_surveys"%>
     </div>
   </div>

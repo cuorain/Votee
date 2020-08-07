@@ -40,6 +40,14 @@ FactoryBot.define do
     image {Rack::Test::UploadedFile.new(File.join(Rails.root, "spec/factories/test_image.jpg"))}
   end
 
+  factory :admin, class: User do
+    name {"admin"}
+    email {"admin@gmail.com"}
+    password {"password"}
+    password_confirmation {"password"}
+    admin {true}
+  end
+
   factory :mob_user, class: User do
     sequence(:name) {|n| "test#{n}"}
     sequence(:email) {|n| "test#{n}@gmail.com"}
