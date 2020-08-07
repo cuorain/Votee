@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   post 'votes/:id', to: 'votes#create', as: "votes"
-  resources :users
+  resources :users do
+    member do
+      get :following, :followers
+    end
+  end
   resources :surveys
   resources :choices
   resources :votes
   get 'surveys/:id/results', to: 'surveys#results', as: "survey_result"
   get 'mysurveys/:id', to: 'surveys#my_survey', as: "my_survey"
+  resources :relationships,       only: [:create, :destroy]
 end

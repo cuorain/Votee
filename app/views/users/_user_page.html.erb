@@ -28,18 +28,22 @@
           <div class="bg-light-custom">フォロー</div>
           <div class="d-flex justify-content-between">
             <div class="flex-fill border-right">
-              <span> フォロー </span><br/>
-              <strong class="follow-count"><%= @user.survey.count %></strong>
+              <span> <%= link_to "フォロー", following_user_path(@user)%></span><br/>
+              <strong id="follow-count"><%= @user.following.count %></strong>
             </div>
             <div class="flex-fill">
-              フォロワー<br/>
-              <strong class="follower-count"><%= @user.vote.count %></strong>
+              <%= link_to "フォロワー", followers_user_path(@user)%><br/>
+              <strong id="follower-count"><%= @user.followers.count %></strong>
             </div>
           </div>
+        </div>
+        <div class="mt-2">
+          <%= render "users/follow_form" if logged_in? %>
         </div>
       </div>
     </div>
   </div>
+
   <div class="row">
     <div class="col-md-6 rounded-0 my-survey">
       <%= render "surveys/my_surveys" %>

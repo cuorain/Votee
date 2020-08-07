@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :edit_password, :update, :destroy]
+  before_action :logged_in_user, only: [:edit, :edit_password, :update, :destroy,
+                                        :following, :followers]
   before_action :correct_user, only: [:edit, :edit_password, :update, :destroy]
   before_action :update_password, only: [:update]
   before_action :not_logged_in_user, only: [:new, :create]
@@ -20,7 +21,10 @@ class UsersController < ApplicationController
   end
 
   def index
+    @title = "ユーザ検索"
+    @path = users_path
     @users = User.where(admin: false).page(params[:page]).per(10).search(params[:search])
+    render 'users/user_feed'
   end
 
   def show
@@ -64,6 +68,22 @@ class UsersController < ApplicationController
     redirect_to root_url
   end
 
+  def following
+    @title = "フォロー"
+    @path = following_user_path
+    @user  = User.find(params[:id])
+    @users = @user.following.page(params[:page]).per(10).search(params[:search])
+    render 'users/user_feed'
+  end
+
+  def followers
+    @title = "フォロワー"
+    @path = followers_user_path
+    @user  = User.find(params[:id])
+    @users = @user.followers.page(params[:page]).per(10).search(params[:search])
+    render 'users/user_feed'
+  end
+
 private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation,
@@ -96,5 +116,4 @@ private
       end
     end
   end
-
 end

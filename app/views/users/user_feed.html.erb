@@ -1,8 +1,8 @@
-<% provide(:title, "ユーザ検索")%>
+<% provide(:title, @title)%>
 <div class="container-fluid mt-5">
-  <h1>ユーザ検索</h1>
+  <h1><%=@title%></h1>
   <div class="search_form">
-    <%= form_with(url: users_path, method: :get, local: true) do |f| %>
+    <%= form_with(url: @path, method: :get, local: true) do |f| %>
       <%= f.text_field :search%>
       <%= f.submit "検索", class: "btn btn-primary"%>
     <% end %>
@@ -11,7 +11,7 @@
     <% if @users.present? %>
       <%= render @users %>
     <% else %>
-      <h3>該当するユーザが見つかりません</h3>
+      <div class="alert alert-danger" role="alert">該当するユーザが見つかりません</div>
     <% end %>
   </div>
   <%= paginate @users %>
