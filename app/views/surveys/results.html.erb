@@ -1,20 +1,21 @@
 <% provide(:title, @survey.question)%>
 <div class="container sign-up-contailner mt-5">
 <h2> <%= "【投票結果】#{@survey.question}" %> </h2>
-<div class="answer-link">
-  <% if logged_in? %>
-    <% if current_user.voted?(@survey)%>
-      <%= link_to "投票修正", survey_path(@survey), class: "btn btn-info"%>
+  <div class="answer-link">
+    <% if logged_in? %>
+      <% if current_user.voted?(@survey)%>
+        <%= link_to "投票修正", survey_path(@survey), class: "btn btn-info"%>
+      <% else %>
+        <%= link_to "投票する", survey_path(@survey), class: "btn btn-primary"%>
+      <% end %>
     <% else %>
-      <%= link_to "投票する", survey_path(@survey), class: "btn btn-primary"%>
+      <div class="alert alert-danger" role="alert">投票するにはアカウントが必要です。</div>
+      <div>アカウントをお持ちでない方は　<%= link_to "新規登録", signup_path, class: "btn btn-primary" %></div>
+      <div>アカウントをお持ちの方は　<%= link_to "ログイン", login_path, class: "btn btn-primary" %></div>
+      <hr/>
     <% end %>
-  <% else %>
-    <div class="alert alert-danger" role="alert">投票するにはアカウントが必要です。</div>
-    <div>アカウントをお持ちでない方は　<%= link_to "新規登録", signup_path, class: "btn btn-primary" %></div>
-    <div>アカウントをお持ちの方は　<%= link_to "ログイン", login_path, class: "btn btn-primary" %></div>
-    <hr/>
-  <% end %>
-</div>
+  </div>
+
   <% if @votes.count == 0 %>
   <div class="alert alert-danger" role="alert">投票がされていません。</div>
   <% else %>
@@ -28,13 +29,53 @@
         </tr>
           <tr>
             <% @choices.each do |c|%>
-              <th><%= vote_count(c) %></th>
+              <th><%= vote_count(@filtered_rel, c) %></th>
             <% end %>
         </tr>
       </table>
     </div>
   <% end %>
-  <div class="comment">
+
+  <div class="data-filter">
+    <div class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">データ分析</div>
+    <div class="collapse border rounded-lg" id="collapseExample">
+    <%= form_with(scope: :search, url: survey_result_path, method: :get, local: true) do |f| %>
+      <div class="field p-1">
+        <%= f.label :sex, "性別　　", class: "font-weight-bold h5"%>
+        <%= f.select :sex, [["指定無し", "0"], ["男", "1"], ["女", "2"]], selected: @params[:sex] %>
+      </div>
+      <div class="field border-top p-1">
+        <%= f.label :age, "年齢　　", class: "font-weight-bold h5" %>
+        <%= f.number_field :mini_age, :value => @params[:mini_age] %>才以上〜
+        <%= f.number_field :max_age, :value => @params[:max_age] %>才以下
+      </div>
+      <div class="field border-top p-1">
+        <%= f.label :prefecture, "都道府県", class: "font-weight-bold h5" %><br/>
+        <div id="all" class="btn btn-success">全選択</div>
+        <div id="all_unchecked" class="btn btn-secondary">全解除</div><br/>
+        <label for="hokkaido"><input type="checkbox" name="areaChecked" id="hokkaido">北海道</label>
+        <label for="tohoku"><input type="checkbox" name="areaChecked" id="tohoku">東北</label>
+        <label for="kanto"><input type="checkbox" name="areaChecked" id="kanto">関東</label>
+        <label for="tyubu"><input type="checkbox" name="areaChecked" id="tyubu">中部</label>
+        <label for="kinki"><input type="checkbox" name="areaChecked" id="kinki">近畿</label>
+        <label for="tyugoku"><input type="checkbox" name="areaChecked" id="tyugoku">中国</label>
+        <label for="shikoku"><input type="checkbox" name="areaChecked" id="shikoku">四国</label>
+        <label for="kyusyu"><input type="checkbox" name="areaChecked" id="kyusyu">九州沖縄</label>
+        <div id="check_boxes" class="mt-1">
+        <%= f.collection_check_boxes :prefecture_code, JpPrefecture::Prefecture.all,
+            :code, :name, include_hidden: false, multiple: true, checked: @result_params[:prefecture_code] do |b| %>
+          <%= b.label {b.check_box + b.text} %>
+        <% end %>
+        </div>
+      </div>
+      <div class="p-1">
+        <%= f.submit "分析", class: "btn btn-primary"%>
+        <%= link_to "条件リセット", search_reset_path, class: "btn btn-secondary"%>
+      </div>
+    <% end %>
+    </div>
+  </div>
+  <div class="comment mt-2">
     <h3>コメント</h3>
     <div class="p-1 comment-feeds">
       <% @votes.each do |vote|%>
@@ -54,3 +95,39 @@
     </div>
   </div>
 </div>
+<script>
+$(function() {
+    $('#all').on('click', function() {
+      $("input[name='search[prefecture_code][]']").prop('checked', true);
+      $("input[name='areaChecked']").prop('checked', true);
+    });
+    $('#all_unchecked').on('click', function() {
+      $("input[name='search[prefecture_code][]']").prop('checked', false);
+      $("input[name='areaChecked']").prop('checked', false);
+    });
+    $('#hokkaido').on('click', function() {
+      $("input[name='search[prefecture_code][]']").eq(0).prop('checked', this.checked);
+    });
+    $('#tohoku').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(1, 7).prop('checked', this.checked);
+    });
+    $('#kanto').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(7, 14).prop('checked', this.checked);
+    });
+    $('#tyubu').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(14, 23).prop('checked', this.checked);
+    });
+    $('#kinki').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(23, 30).prop('checked', this.checked);
+    });
+    $('#tyugoku').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(30, 35).prop('checked', this.checked);
+    });
+    $('#shikoku').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(35, 39).prop('checked', this.checked);
+    });
+    $('#kyusyu').on('click', function() {
+      $("input[name='search[prefecture_code][]']").slice(39, 47).prop('checked', this.checked);
+    });
+  });
+  </script>

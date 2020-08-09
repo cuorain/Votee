@@ -40,10 +40,20 @@ class SurveysController < ApplicationController
   end
 
   def results
+    @params = search_params
+    @result_params = ResultParameter.new(search_params).define_params
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
-    @votes = @survey.votes
-    @chart = VotesChoice.joins(:choice).where("vote_id IN (?)", @votes.ids).group(:answer).count
+    all_votes = @survey.votes
+    filtered_user = User.search_users(@result_params)
+    @votes = Vote.joins(:user).where("votes.id IN (?) AND user_id IN (?)",
+              all_votes.ids, filtered_user.ids)
+    @filtered_rel = VotesChoice.joins(:choice).where("vote_id IN (?)", @votes.ids)
+    @chart = @filtered_rel.group(:answer).count
+  end
+
+  def search_reset
+    results
   end
 
   def update
@@ -66,5 +76,9 @@ private
 
   def survey_params
     params.require(:survey).permit(:question, choices_attributes:[:id, :answer, :_destroy])
+  end
+
+  def search_params
+    params.fetch(:search, {}).permit(:sex, :max_age, :mini_age, {:prefecture_code => []})
   end
 end

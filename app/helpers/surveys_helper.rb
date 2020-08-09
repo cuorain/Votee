@@ -1,6 +1,6 @@
 module SurveysHelper
-  def vote_count(choice)
-    vote = VotesChoice.where("choice_id = ?", choice.id).count
+  def vote_count(rel, choice)
+    vote = rel.where("choice_id = ?", choice.id).count
     return vote
   end
 

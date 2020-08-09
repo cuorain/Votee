@@ -90,4 +90,12 @@ has_many :followers, through: :passive_relationships, source: :follower
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def self.search_users(params)
+    self.where("sex IN (?) AND
+                birthday BETWEEN ? AND ? AND
+                prefecture_code IN (?)",
+                params[:sex], params[:older_birthday],
+                params[:elder_birthday], params[:prefecture_code])
+  end
 end

@@ -7,10 +7,10 @@ User.create!(
 )
 users = []
 #初期ユーザ
-60.times do |n|
+40.times do |n|
   if n <= 30
     sex = "1"
-  elsif n >= 31 && n <= 60
+  elsif n >= 31 && n <= 40
     sex = "2"
   else
     sex = "#{rand(1..2)}"
@@ -190,7 +190,7 @@ end
 end
 
 users.each do |user|
-  25.times do |n|
+  10.times do |n|
     survey = Survey.all[rand(0..29)]
     user.vote.create!(
       survey_id: survey.id,
