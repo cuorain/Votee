@@ -2,13 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "users/index", type: :system do
   before(:each) do
+    @user = create(:user)
     50.times {create(:mob_user)}
+    login(:user)
   end
 
   context "ユーザー検索ページ" do
     example "ユーザーが表示されているか" do
       visit users_path
-      expect(page).to have_content User.first.name
+      expect(page).to have_content User.second.name
     end
 
     example "検索したユーザーが表示されているか" do
@@ -32,6 +34,9 @@ RSpec.describe "users/index", type: :system do
     end
 
     example "管理者ログインの時、削除ボタンあるか" do
+      visit root_path
+      find(".dropdown-toggle").click
+      click_on "ログアウト"
       create(:admin)
       admin_login(:admin)
       visit users_path

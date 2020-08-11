@@ -6,7 +6,7 @@ RSpec.feature 'ログインとログアウト' do
   end
   scenario 'ログイン成功' do
     visit root_path
-    click_on 'ログイン'
+    find(".btn-info").click
     fill_in 'メールアドレス', with: 'aiueo@gmail.com'
     fill_in 'パスワード', with: 'password'
     click_on 'ログイン', class: 'btn'
@@ -15,7 +15,7 @@ RSpec.feature 'ログインとログアウト' do
 
   scenario 'ログイン失敗' do
     visit root_path
-    click_on 'ログイン'
+    find(".btn-info").click
     fill_in 'メールアドレス', with: 'aiueo@gmail.com'
     fill_in 'パスワード', with: 'invalid'
     click_on 'ログイン', class: 'btn'
@@ -24,7 +24,7 @@ RSpec.feature 'ログインとログアウト' do
 
   scenario 'ログアウト' do
     visit root_path
-    click_on 'ログイン'
+    find(".btn-info").click
     fill_in 'メールアドレス', with: 'aiueo@gmail.com'
     fill_in 'パスワード', with: 'password'
     click_on 'ログイン', class: 'btn'

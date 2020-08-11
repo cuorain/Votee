@@ -1,14 +1,19 @@
 
-  <li>
-      <% if user.image? %>
-        <%= image_tag user.image.url, id: :index_mini_image %>
-      <% else %>
-        <%= image_tag '/user_images/default.jpg', id: :index_mini_image %>
-      <% end %>
-    <%= link_to user.name, user %>
-    <% if logged_in?%>
-      <% if current_user.admin? %>
-        <%= link_to "削除", user_path(user), method: :delete, class:"btn btn-danger"%>
-      <% end %>
+  <li class="d-flex align-items-center user-feed">
+    <%= link_to user do %>
+      <span class="user-feed-name">
+        <% if user.image? %>
+          <%= image_tag user.image.url, id: :index_mini_image %>
+        <% else %>
+          <%= image_tag '/user_images/default.jpg', id: :index_mini_image %>
+        <% end %>
+        <%= user.name %>
+        <% if current_user.admin? %>
+          <%= link_to "削除", user_path(user), method: :delete, class:"btn btn-danger"%>
+        <% end %>
+      </span>
     <% end %>
+    <span class="follow-status">
+      <%= render "users/follow_form", user: user %>
+    </span>
   </li>

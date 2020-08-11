@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get 'mysurveys/:id', to: 'surveys#my_survey', as: "my_survey"
   resources :relationships,       only: [:create, :destroy]
   get 'surveys/:id/results', to: 'surveys#search_reset', as: "search_reset"
+  post "/demo_login", to: "sessions#demo_login", as: "demo_login"
 end

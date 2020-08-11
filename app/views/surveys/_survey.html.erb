@@ -1,15 +1,21 @@
 <% survey.each do |survey| %>
-  <li class="d-flex align-items-center">
     <% if current_user.maked_survey?(survey) || current_user.voted?(survey) %>
-      <span class="survey-link"><%= link_to survey.question, survey_result_path(survey) %></span>
-      <% if current_user.voted?(survey)%>
-        <span class="btn btn-success survey-status">投票中</span>
-      <% else %>
-        <span class="btn btn-secondary survey-status">未投票</span>
+      <%= link_to survey_result_path(survey) do %>
+        <li class="d-flex align-items-center">
+          <span class="survey-link"><%= survey.question %></span>
+          <% if current_user.voted?(survey)%>
+            <span class="btn btn-success survey-status">投票中</span>
+          <% else %>
+            <span class="btn btn-secondary survey-status">未投票</span>
+          <% end %>
+        </li>
       <% end %>
     <% else %>
-      <%= link_to survey.question, survey %>
-      <span class="btn btn-secondary survey-status">未投票</span>
+      <%= link_to survey do %>
+        <li class="d-flex align-items-center">
+          <%= survey.question %>
+          <span class="btn btn-secondary survey-status">未投票</span>
+        </li>
+      <% end %>
     <% end %>
-  </li>
 <% end %>

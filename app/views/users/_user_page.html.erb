@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="mt-2">
-          <%= render "users/follow_form" if logged_in? %>
+          <%= render "users/follow_form", user: @user %>
         </div>
       </div>
     </div>

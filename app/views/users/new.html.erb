@@ -4,7 +4,10 @@
 </div>
 <div class="container sign-up-contailner mt-5">
 <h2>新規登録</h2>
-
+<div class="alert alert-info">
+    性別、生年月日、都道府県は公開されません。<br/>
+    アンケート結果のフィルタリング機能のために使われます。
+</div>
 <%= form_with(model: @user, url: signup_path, local: true) do |f| %>
 
 
@@ -40,6 +43,7 @@
 
   <div class="field">
     <%= f.label :birthday, "生年月日" %>
+    <em class="text-danger">(登録後、変更できません)</em>
     <%= f.date_select :birthday, use_month_numbers: true,
         start_year: (Time.now.year-100), end_year: (Time.now.year-3), default: Date.new((Time.now.year-20), 1, 1)%>
   </div>
