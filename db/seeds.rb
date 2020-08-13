@@ -155,11 +155,11 @@ end
       a3 = "中日ドラゴンズ以外あり得ない！"
       a4 = "今年もこれからも中日ドラゴンズ"
     when 9
-      q = "【サッカー】久保●●はどうなると思う？"
-      a1 = "日本サッカーに革命を起こす"
-      a2 = "日本をW杯優勝に導く"
-      a3 = "いずれバロンドールに選ばれる"
-      a4 = "海外で鳴かず飛ばずの選手になる"
+      q = "Airpodsの使用感は？"
+      a1 = "もう他のイヤホンに戻れない"
+      a2 = "とてもいい"
+      a3 = "いいけど値段に見合わない"
+      a4 = "自分には合わない"
     when 8
       q = "好きな映画は？"
       a1 = "ショーシャンクの空に"
@@ -192,9 +192,26 @@ end
 users.each do |user|
   10.times do |n|
     survey = Survey.all[rand(0..29)]
-    user.vote.create!(
-      survey_id: survey.id,
-      choice_ids: survey.choices.all[rand(0..3)].id
+    if n%2 == 0
+      comment = ""
+    elsif n == 1
+      comment = "順当な結果だね！"
+    elsif n == 3
+      comment = "いいアンケートだと思う"
+    elsif n == 5
+      comment = "めっちゃ意外な結果！w"
+    elsif n == 7
+      comment = "これ選ぶ人はわかってるわ"
+    else
+      comment = "フィルタリング楽しい！"
+    end
+    @vote = user.vote.create!(
+            survey_id: survey.id,
+            comment: comment
+            )
+    VotesChoice.create!(
+      vote_id: @vote.id,
+      choice_id: survey.choices.all[rand(0..3)].id
     )
   end
 end

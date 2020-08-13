@@ -133,9 +133,4 @@ $(function() {
       $("input[name='search[prefecture_code][]']").slice(39, 47).prop('checked', this.checked);
     });
   });
-
-    history.pushState(null, null);
-    window.addEventListener('popstate', function(e) {
-      alert('ブラウザの「戻る」は使用しないでください')
-    });
   </script>
