@@ -192,18 +192,14 @@ end
 users.each do |user|
   10.times do |n|
     survey = Survey.all[rand(0..29)]
-    if n%2 == 0
-      comment = ""
-    elsif n == 1
-      comment = "順当な結果だね！"
-    elsif n == 3
+    if n == 1
       comment = "いいアンケートだと思う"
-    elsif n == 5
-      comment = "めっちゃ意外な結果！w"
-    elsif n == 7
-      comment = "これ選ぶ人はわかってるわ"
-    else
+    elsif n == 2
       comment = "フィルタリング楽しい！"
+    elsif n == 3
+      comment = "めっちゃ意外な結果！w"
+    else
+      comment = ""
     end
     @vote = user.vote.create!(
             survey_id: survey.id,
