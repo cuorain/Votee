@@ -23,7 +23,6 @@ RSpec.feature '投票機能' do
       fill_in "コメント", with: "特にふじが好き。"
       click_on "投票", class: "btn"
       expect(page).to have_content "選択してください。"
-      expect(page).to have_content "新規投票"
     end
 
     example "コメントが長いとエラー" do
@@ -32,7 +31,6 @@ RSpec.feature '投票機能' do
       fill_in "コメント", with: "あ"*257
       click_on "投票", class: "btn"
       expect(page).to have_content "コメントは256文字以内で入力してください。"
-      expect(page).to have_content "新規投票"
     end
   end
 

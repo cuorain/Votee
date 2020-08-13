@@ -14,7 +14,7 @@ RSpec.feature '投票編集' do
       uncheck "りんご"
       check "ブルーベリー"
       click_on "投票", class: "btn"
-      expect(page).to have_content "投票修正しました。"
+      expect(page).to have_content "投票しました。"
       expect(page).to have_content "投票結果"
       click_on "投票修正", class: "btn"
       expect(page).to have_checked_field("ブルーベリー")
@@ -28,8 +28,6 @@ RSpec.feature '投票編集' do
       uncheck "りんご"
       click_on "投票", class: "btn"
       expect(page).to have_content "選択してください。"
-      expect(page).to have_content "投票修正"
-      expect(page).to have_checked_field("りんご")
     end
   end
 
@@ -40,7 +38,7 @@ RSpec.feature '投票編集' do
       expect(page).to have_content "投票を取り消しました"
       expect(page).to have_content "投票結果"
       click_on "投票する", class: "btn"
-      expect(page).to have_content "新規投票"
+      expect(page).not_to have_content "投票取消"
     end
   end
   #二重投票不可はmodelへ

@@ -1,6 +1,7 @@
 <% provide(:title, @survey.question)%>
 <div class="container sign-up-contailner mt-5">
-<h2> <%= "【投票結果】#{@survey.question}" %> </h2>
+<h2>【投票結果】</h2>
+<h3> <%= "　#{@survey.question}" %> </h3>
   <div class="answer-link">
     <% if logged_in? %>
       <% if current_user.voted?(@survey)%>
@@ -36,7 +37,7 @@
     </div>
   <% end %>
 
-  <div class="data-filter">
+  <div class="data-filter mt-3">
     <div class="btn btn-info" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">データ分析</div>
     <div class="collapse border rounded-lg" id="collapseExample">
     <%= form_with(scope: :search, url: survey_result_path, method: :get, local: true) do |f| %>
@@ -46,8 +47,10 @@
       </div>
       <div class="field border-top p-1">
         <%= f.label :age, "年齢　　", class: "font-weight-bold h5" %>
-        <%= f.number_field :mini_age, :value => @params[:mini_age] %>才以上〜
-        <%= f.number_field :max_age, :value => @params[:max_age] %>才以下
+        <%= f.number_field :mini_age, min: 0, max: 130, size: 30,
+              :value => @params[:mini_age] %>才以上〜
+        <%= f.number_field :max_age, min: 0, max: 130, size: 30,
+              :value => @params[:max_age] %>才以下
       </div>
       <div class="field border-top p-1">
         <%= f.label :prefecture, "都道府県", class: "font-weight-bold h5" %><br/>
@@ -80,7 +83,7 @@
     <div class="p-1 comment-feeds">
       <% @votes.each do |vote|%>
         <li>
-          <% if vote.comment %>
+          <% unless vote.comment.blank? %>
             <div class="row">
               <div class="col-md-2 font-weight-bold"><%= voted_choice(vote) %></div>
               <div class="col-md-10">
@@ -130,4 +133,9 @@ $(function() {
       $("input[name='search[prefecture_code][]']").slice(39, 47).prop('checked', this.checked);
     });
   });
+
+    history.pushState(null, null);
+    window.addEventListener('popstate', function(e) {
+      alert('ブラウザの「戻る」は使用しないでください')
+    });
   </script>

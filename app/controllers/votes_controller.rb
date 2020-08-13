@@ -1,32 +1,41 @@
 class VotesController < ApplicationController
   before_action :logged_in_user
-  before_action :correct_user, only: [:update]
+  before_action :duplicate_vote, only: :create
 
   def create
     @new_vote = current_user.vote.build(vote_params)
-    if params[:vote][:choice_ids] != nil && @new_vote.save
-      flash[:success] = "投票しました。"
-      redirect_to survey_result_path
-    elsif params[:vote][:choice_ids] == nil
-      flash[:danger] = "選択してください。"
-      redirect_to request.referer
+    unless params[:vote][:choice_ids] == nil
+      if params[:vote][:comment].length > 256
+        flash[:danger] = "コメントは256文字以内で入力してください。"
+        redirect_to request.referer
+      else
+        if @new_vote.save
+          params[:vote][:choice_ids].each do |choice_id|
+            VotesChoice.create(vote_id: @new_vote.id, choice_id: choice_id)
+          end
+          flash[:success] = "投票しました。"
+          redirect_to survey_result_path
+        else
+          log_out
+          flash[:danger] = "予期せぬエラーが発生しました。"
+          redirect_to root_path
+        end
+      end
     else
-      flash[:danger] = "コメントは256文字以内で入力してください。"
+      flash[:danger] = "選択してください。"
       redirect_to request.referer
     end
   end
 
   def update
     @edit_vote = current_user.vote.find_by(params[:vote_id])
-    if params[:vote][:choice_ids] != nil
-      @edit_vote.update_attributes(vote_params)
-      flash[:success] = "投票修正しました。"
-      redirect_to survey_result_path
+    if @edit_vote
+      @edit_vote.destroy
+      create
     else
-      if request.referer&.include?("/surveys")
-        flash[:danger] = "選択してください。"
-        redirect_to request.referer
-      end
+      log_out
+      flash[:danger] = "予期せぬエラーが発生しました。"
+      redirect_to root_path
     end
   end
 
@@ -38,6 +47,14 @@ class VotesController < ApplicationController
 
 private
   def vote_params
-    params.require(:vote).permit(:user_id, :survey_id, :comment, {:choice_ids => []})
+    params.require(:vote).permit(:user_id, :survey_id, :comment)
+  end
+
+  def duplicate_vote
+    survey = Survey.find_by(id: params[:vote][:survey_id])
+    if current_user.voted?(survey)
+      flash[:danger] = "二重投票はできません。"
+      redirect_to root_path
+    end
   end
 end

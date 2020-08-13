@@ -11,7 +11,7 @@ RSpec.feature "ユーザ編集", type: :system do
   context "編集成功" do
     it "情報編集" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       fill_in 'ユーザ名', with: 'edit_test'
       fill_in 'メールアドレス', with: 'edit_test@gmail.com'
@@ -24,7 +24,7 @@ RSpec.feature "ユーザ編集", type: :system do
 
     it "パスワード編集" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "パスワード変更", class: "btn"
       fill_in "新しいパスワード", with: "foobar"
@@ -35,10 +35,10 @@ RSpec.feature "ユーザ編集", type: :system do
     end
 
     it "管理者による編集" do
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "ログアウト"
       admin_login(@admin)
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       fill_in 'ユーザ名', with: 'edit_test'
       fill_in 'メールアドレス', with: 'edit_test@gmail.com'
@@ -53,7 +53,7 @@ RSpec.feature "ユーザ編集", type: :system do
   context "編集失敗" do
     it "不正なデータ" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       fill_in 'ユーザ名', with: ''
       fill_in 'メールアドレス', with: ''
@@ -66,7 +66,7 @@ RSpec.feature "ユーザ編集", type: :system do
 
     it "不正なパスワード" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "パスワード変更", class: "btn"
       fill_in "新しいパスワード", with: "fooba"
@@ -78,7 +78,7 @@ RSpec.feature "ユーザ編集", type: :system do
 
     it "現在のパスワードが違う" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "パスワード変更", class: "btn"
       fill_in "新しいパスワード", with: "foobar"
@@ -90,7 +90,7 @@ RSpec.feature "ユーザ編集", type: :system do
 
     it "パスワード確認違う" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "パスワード変更", class: "btn"
       fill_in "新しいパスワード", with: "foobar"
@@ -102,7 +102,7 @@ RSpec.feature "ユーザ編集", type: :system do
 
     it "パスワード未入力" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "パスワード変更", class: "btn"
       fill_in "新しいパスワード", with: ""
@@ -116,7 +116,7 @@ RSpec.feature "ユーザ編集", type: :system do
   context "before_actionの動作" do
     it "非ログインユーザー" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "ログアウト"
       visit edit_user_path(@user)
       expect(page).to have_content "ログインしてください。"
@@ -131,14 +131,14 @@ RSpec.feature "ユーザ編集", type: :system do
   context "削除" do
     it "アカウント削除" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "設定", class: "dropdown-item"
       click_on "アカウント削除", class: "btn"
       page.driver.browser.switch_to.alert.accept
       expect(page).to have_content "アカウントを削除しました。"
     end
     it "管理者による削除" do
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "ログアウト"
       admin_login(@admin)
       visit users_path

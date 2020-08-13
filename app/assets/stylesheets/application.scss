@@ -21,9 +21,24 @@
     height: 300px;
     overflow: hidden;
   }
+  .top-icon {
+    background-image: image-url("top-background.jpg");
+    background-size: cover;
+  }
+  .text-box {
+    background: rgba(255, 255, 255, 0.75);
+  }
+  .home-content {
+    text-shadow: 0.5px 0.5px;
+  }
+  .navbar-toggler-icon .dropdown-toggler {
+    border-color: rgba(0,0,0,0);
+  }
   //カードのアイコン
   .card-img-top {
     padding: 10px;
+    width: 100px;
+    height: 100px;
   }
   //副見出し
   .lead {
@@ -32,6 +47,9 @@
   //ボタンの距離
   .btn {
     margin-bottom: 10px;
+  }
+  .dropdown-menu {
+    background-color: #343a40;
   }
 //ログイン中のホーム＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊＊
   //ユーザ情報

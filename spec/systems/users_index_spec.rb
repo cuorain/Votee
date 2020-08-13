@@ -35,7 +35,7 @@ RSpec.describe "users/index", type: :system do
 
     example "管理者ログインの時、削除ボタンあるか" do
       visit root_path
-      find(".dropdown-toggle").click
+      find("#dropdownMenuButton").click
       click_on "ログアウト"
       create(:admin)
       admin_login(:admin)

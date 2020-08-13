@@ -1,6 +1,7 @@
-<% provide(:title, @survey.question)%>
 <% if @new_vote %>
+  <% provide(:title, "【新規投票】#{@survey.question}")%>
   <%= render "new_vote" %>
 <% else %>
+  <% provide(:title, "【投票編集】#{@survey.question}")%>
   <%= render "edit_vote" %>
 <% end %>

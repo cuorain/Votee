@@ -31,7 +31,7 @@ class SurveysController < ApplicationController
     if current_user.voted?(@survey)
       @edit_vote = current_user.vote.find_by(survey_id: @survey.id)
     else
-      @new_vote = current_user.vote.build
+      @new_vote = current_user.vote.new
     end
   end
 

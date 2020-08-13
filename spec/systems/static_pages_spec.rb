@@ -6,7 +6,8 @@ RSpec.describe "static_pages", type: :system do
     context "ログインしてない時" do
       it "リンクがあるか" do
         visit root_path
-        expect(page).to have_link 'The survey', href: root_path
+        expect(page).to have_link 'Votee', href: root_path
+        find("#dropdownMenuButton").click
         expect(page).to have_link 'ホーム', href: root_path
         expect(page).to have_link 'アンケート一覧', href: surveys_path
         expect(page).to have_link '新規登録', href: signup_path
@@ -21,11 +22,11 @@ RSpec.describe "static_pages", type: :system do
       end
       it "リンクがあるか" do
         visit root_path
-        expect(page).to have_link 'The survey', href: root_path
+        expect(page).to have_link 'Votee', href: root_path
+        find("#dropdownMenuButton").click
         expect(page).to have_link 'ホーム', href: root_path
         expect(page).to have_link 'アンケート一覧', href: surveys_path
         expect(page).to have_link 'アンケート作成', href: new_survey_path
-        find(".dropdown-toggle").click
         expect(page).to have_link 'ユーザ検索', href: users_path
         expect(page).to have_link '設定', href: edit_user_path(@user)
         expect(page).to have_link 'ログアウト', href: logout_path

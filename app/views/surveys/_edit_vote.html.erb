@@ -3,10 +3,10 @@
 </div>
 
 <div class="container sign-up-contailner mt-5">
-  <h2>【投票修正】<%= @survey.question %></h2>
+  <h2><%= @survey.question %></h2>
 
-  <%= form_with(model: @edit_vote, url: vote_path, local: true) do |f| %>
-    <%= f.hidden_field :vote_id, :value => @edit_vote.id%>
+  <%= form_with(model: @edit_vote, url: vote_path, method: :patch, local: true) do |f| %>
+    <%= f.hidden_field :vote_ids, :value => @edit_vote.id%>
       <%= render "vote_form", f: f %>
     <div class="choice_delete"><%= link_to "投票取消", vote_path, method: :delete, class: "btn btn-danger"%></div>
   <% end %>

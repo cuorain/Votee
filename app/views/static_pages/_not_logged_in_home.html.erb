@@ -1,10 +1,12 @@
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">The　Survey</h1>
-    <p class="lead">あなたは周りの人のことをどれだけ知っていますか？</p>
-    <p>The surveyはアンケートに特化したSNSアプリです。</p>
-    <p>みんなの好きなものや考え方を知ることができます。</p>
-    <p>簡単フィルタリングで、世代や性別の違いが分かります。</p>
+<div class="jumbotron jumbotron-fluid top-icon">
+  <div class="container text-box mb-2">
+    <div class="home-content">
+      <h1 class="display-4">Votee</h1>
+      <p class="lead">あなたは周りの人のことをどれだけ知っていますか？</p>
+      <p>Votee(ボーティー)はアンケートに特化したSNSアプリです。</p>
+      <p>みんなの好きなものや考え方を知ることができます。</p>
+      <p>簡単フィルタリングで、世代や性別の違いが分かります。</p>
+    </div>
     <span><%= link_to "新規登録", signup_path, class: "btn btn-primary" %></span>
     <span><%= link_to "ログイン", login_path, class: "btn btn-info" %></span>
     <span data-toggle="tooltip" data-placement="right" title="ランダムな初期データにログインします。">
@@ -15,21 +17,36 @@
 </div>
 <!--説明部分（カード）-->
 <div class="container container-m">
-  <div class="card-deck">
-    <div class="card">
-     <div class="card-body">
-        <img class="card-img-top" src="../assets/icon_binder.png" alt="アンケート">
-        <h4 class="card-title">アンケート</h4>
-        <p class="card-text">アンケートを自由に作りましょう。</p>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-body">
-        <img class="card-img-top" src="../assets/icon_analysis.png" alt="分析">
-        <h4 class="card-title">結果分析</h4>
-        <p class="card-text">アンケートを分析することができます。年齢や性別、住んでいる場所
-          によって考え方は異なります。</p>　
-      </div>
-    </div>
+  <div class="sub-content row">
+    <img class="card-img-top float-left mr-2" src="../assets/icon_binder.png" alt="アンケート">
+    <span class="content-text">
+      <h4 class="font-weight-bold">アンケート作成・投票</h4>
+      <p class="card-text">
+        <em>「誰が一番人気何だろう？」「みんなはどう思うんだろう？」<br/></em>
+        あなたの小さな疑問をアンケートにしてみませんか？
+        もちろん投票は自由です。
+      </p>
+    </span>
   </div>
+    <div class="sub-content mt-4 row">
+      <img class="card-img-top float-left mr-2" src="../assets/icon_analysis.png" alt="分析">
+      <div class="content-text">
+        <h4 class="font-weight-bold">投票結果を分析</h4>
+        <p class="card-text">
+          年齢や性別、住んでいる場所によって考え方は異なります。<br/>
+          簡単フィルタリングで、思わぬ発見があるかもしれません。
+        </p>　
+      </div>
+    </div>
+    <div class="sub-content mt-2 row">
+      <img class="card-img-top float-left mr-2" src="../assets/icon_share.png" alt="分析">
+        <span class="content-text">
+          <h4 class="font-weight-bold">フォロー機能</h4>
+          <p class="card-text">
+            友達や家族、趣味や考え方が同じ人と繋がることができます。<br/>
+            彼らのアンケートに答えて、相互理解を深めましょう。
+          </p>　
+      </span>
+    </div>
+
 </div>

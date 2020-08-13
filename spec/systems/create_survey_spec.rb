@@ -8,7 +8,8 @@ RSpec.feature 'アンケート作成' do
 
   scenario 'アンケート作成成功', js: true do
     visit root_path
-    click_on 'アンケート作成', class: "nav-link"
+    find("#dropdownMenuButton").click
+    click_on 'アンケート作成', class: "dropdown-item"
     fill_in '質問', with: '好きな食べ物は？'
     fill_in 'survey[choices_attributes][0][answer]', with: 'そば'
     9.times do |i|
@@ -25,7 +26,8 @@ RSpec.feature 'アンケート作成' do
 
   scenario '質問空欄', js: true do
     visit root_path
-    click_on 'アンケート作成', class: "nav-link"
+    find("#dropdownMenuButton").click
+    click_on 'アンケート作成', class: "dropdown-item"
     fill_in '質問', with: ''
     fill_in 'survey[choices_attributes][0][answer]', with: 'そば'
     click_on '新規アンケート開始', class: 'btn'
@@ -34,7 +36,8 @@ RSpec.feature 'アンケート作成' do
 
   scenario "選択肢空欄" do
     visit root_path
-    click_on 'アンケート作成', class: "nav-link"
+    find("#dropdownMenuButton").click
+    click_on 'アンケート作成', class: "dropdown-item"
     fill_in '質問', with: '何が好き？'
     fill_in 'survey[choices_attributes][0][answer]', with: ''
     click_on '新規アンケート開始', class: 'btn'
@@ -43,7 +46,8 @@ RSpec.feature 'アンケート作成' do
 
   scenario "追加した選択肢空欄",js: true do
     visit root_path
-    click_on 'アンケート作成', class: "nav-link"
+    find("#dropdownMenuButton").click
+    click_on 'アンケート作成', class: "dropdown-item"
     fill_in '質問', with: '何が好き？'
     fill_in 'survey[choices_attributes][0][answer]', with: 'そば'
     click_on "選択肢を追加", class: "btn"

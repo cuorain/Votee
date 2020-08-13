@@ -25,7 +25,7 @@ RSpec.feature '投票機能' do
     example "他人の作ったアンケートのリンクは投票画面へ" do
       visit surveys_path
       click_on "#{@other_survey.question}"
-      expect(page).to have_content "【新規投票】"
+      expect(page).not_to have_content "投票取消"
     end
   end
 
