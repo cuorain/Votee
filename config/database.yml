@@ -36,5 +36,7 @@ test:
 
 production:
   <<: *default
-
+  database: votee_production
+  username: root
+  password:
   # database: db/production.sqlite3
