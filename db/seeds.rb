@@ -34,7 +34,7 @@ users = []
   )
 end
 
-30.times do |n|
+25.times do |n|
   case n
   when 24
       q = "好きな果物は？"
@@ -208,4 +208,14 @@ users.each do |user|
       choice_id: survey.choices.all[rand(0..3)].id
     )
   end
+end
+
+10.times do |n|
+  followings = users[n+2..25].sample(10)
+  users[n+1].following << followings
+end
+
+users[11..25].each do |follower|
+  followings = users[1..10].sample(7)
+  follower.following << followings
 end

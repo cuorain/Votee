@@ -1,24 +1,31 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Voteeとは
+アンケート機能に特化したSNSです。
+アプリは[こちらから。](http://52.194.134.56/)(登録不要で体験できる「お試しログイン」あります。)
+# 主な機能一覧
+ユーザー
+* 登録・編集・削除
+* ログイン・ログアウト
+* (お試しログイン)
+* フォロー
+* 一覧表示(全ユーザ、フォロー・フォロワー)
+* キーワード検索
+アンケート
+* 作成・編集・削除
+* 投票(新規・編集・削除、コメント付)
+* 結果閲覧(グラフ＆表)
+* 結果フィルタリング(性別、年齢、都道府県)
+* 一覧表示(全て、作成主、参加中)
+* キーワード検索
+# バージョン
+Ruby 2.6.5
+Ruby on Rails 5.2.4
+# アプリ構成
+デプロイ：AWS
+テスト：rspec, capybara
+データベース：mysql2
+デザイン：bootstrap4
+画像アップロード：carrierwave
+ページネーション：kaminari
+グラフ作成：chartkick, chartable
+都道府県データ：jp_prefecture
+サンプルデータ：faker

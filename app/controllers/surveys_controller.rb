@@ -40,18 +40,26 @@ class SurveysController < ApplicationController
   end
 
   def results
+    #フォームに入力値保持するため
     @params = search_params
+    #ユーザのフィルタリング用にパラメ加工
     @result_params = ResultParameter.new(search_params).define_params
+    #アクセスしたアンケート、その選択肢、投票
     @survey = Survey.find(params[:id])
     @choices = @survey.choices.all
     all_votes = @survey.votes
+    #ユーザーのフィルタリング
     filtered_user = User.search_users(@result_params)
+    #全投票の中から、欲しいものを抽出
     @votes = Vote.joins(:user).where("votes.id IN (?) AND user_id IN (?)",
               all_votes.ids, filtered_user.ids)
+    #Choiceでカウントするため、中間テーブル呼び出し
     @filtered_rel = VotesChoice.joins(:choice).where("vote_id IN (?)", @votes.ids)
+    #chartkickに従って実装
     @chart = @filtered_rel.group(:answer).count
   end
 
+  #検索条件をリセットする
   def search_reset
     results
   end
@@ -78,6 +86,7 @@ private
     params.require(:survey).permit(:question, choices_attributes:[:id, :answer, :_destroy])
   end
 
+  #フィルタリング用
   def search_params
     params.fetch(:search, {}).permit(:sex, :max_age, :mini_age, {:prefecture_code => []})
   end
