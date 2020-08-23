@@ -9,6 +9,7 @@
 * フォロー
 * 一覧表示(全ユーザ、フォロー・フォロワー)
 * キーワード検索
+
 アンケート
 * 作成・編集・削除
 * 投票(新規・編集・削除、コメント付)
@@ -18,14 +19,23 @@
 * キーワード検索
 # バージョン
 Ruby 2.6.5
+
 Ruby on Rails 5.2.4
 # アプリ構成
 デプロイ：AWS
+
 テスト：rspec, capybara
+
 データベース：mysql2
+
 デザイン：bootstrap4
+
 画像アップロード：carrierwave
+
 ページネーション：kaminari
+
 グラフ作成：chartkick, chartable
+
 都道府県データ：jp_prefecture
+
 サンプルデータ：faker
